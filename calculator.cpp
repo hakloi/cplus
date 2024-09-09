@@ -21,7 +21,7 @@ int main(){
     cout << "Great! Write the second number: " << endl;
     cin >> n2;
     
-    cout << "Choose operation:\n 1. Multiplication\n 2. Division\n 3. Remainder\n 4. Sum \n 5. Difference\n 6. Use previous numbers\n 7. Exit\n";
+    cout << "Choose operation:\n 1. Multiplication\n 2. Division\n 3. Remainder\n 4. Sum \n 5. Difference\n";
     cin >> choice;
         
     switch(choice){
