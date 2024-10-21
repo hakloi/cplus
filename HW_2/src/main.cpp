@@ -1,17 +1,20 @@
-// src/main.cpp
-#include "student.hpp"
 #include <iostream>
+#include "student.hpp"
+#include "course_program.hpp"
 
 int main() {
-    Student student("Violett", "Patrusheva");
+    Student student("Ava", "Lovelace");
+    std::cout << "Student: " << student.getFirstName() << " " << student.getLastName() << std::endl;
+    std::cout << "Average grade: " << student.getAverageGrade() << std::endl;
 
-    student.addGrade(5);
-    student.addGrade(4);
-    student.addGrade(5);
-    student.addGrade(5);
-    student.addGrade(4);
+    CourseProgram course("Programming with data");
+    course.addTopic("Introduction");
+    course.addTopic("Strings");
 
-    student.displayInfo();
+    std::cout << "Course topics:" << std::endl;
+    for (const auto& topic : course.getTopics()) {
+        std::cout << "- " << topic << std::endl;
+    }
 
     return 0;
 }

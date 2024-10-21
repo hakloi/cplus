@@ -1,7 +1,6 @@
-# Makefile
 CXX = g++
 CXXFLAGS = -Wall -Werror -I include
-SRC = src/main.cpp src/student.cpp
+SRC = src/main.cpp src/student.cpp src/course_program.cpp
 OBJ = $(SRC:.cpp=.o)
 TARGET = out/program
 
@@ -15,3 +14,4 @@ $(TARGET): $(OBJ)
 
 clean:
 	rm -f $(OBJ) $(TARGET)
+

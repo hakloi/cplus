@@ -1,24 +1,24 @@
-// include/student.h
 #ifndef STUDENT_H
 #define STUDENT_H
 
 #include <string>
-#include <vector>
+#include <array>
 
 class Student {
-private:
-    std::string first_name; 
-    std::string last_name; 
-    std::vector<int> grades; 
-
 public:
-    Student(const std::string& first_name, const std::string& last_name);
+    static const int NUM_GRADES = 5; 
+    static const int DEFAULT_GRADE = 3;
 
-    void addGrade(int grade);
+    Student(const std::string& firstName, const std::string& lastName);
+    std::string getFirstName() const { return firstName; }
+    std::string getLastName() const { return lastName; }
 
     double getAverageGrade() const;
 
-    void displayInfo() const;
+private:
+    std::string firstName;
+    std::string lastName;
+    std::array<int, NUM_GRADES> grades;
 };
 
 #endif 
