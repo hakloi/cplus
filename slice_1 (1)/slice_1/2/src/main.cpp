@@ -13,11 +13,11 @@ int main()
              (s.getProfession() == "Deliverer") &&
              (abs(s.getMeanPoints() - 1000.0f) < 0.0001f)) << endl;
 
-    Employee s2("Name of employee 2", 25, "Manager", 3000.0f);
-    cout << ((s2.getName() == "Name of employee 2") &&
-             (s2.getAge() == 25) &&
-             (s2.getProfession() == "Manager") &&
-             (abs(s2.getMeanPoints() - 3000.0f) < 0.0001f)) << endl;
+    Employee s1("Name of employee 2", 25, "Manager", 3000.0f);
+    cout << ((s1.getName() == "Name of employee 2") &&
+             (s1.getAge() == 25) &&
+             (s1.getProfession() == "Manager") &&
+             (abs(s1.getMeanPoints() - 3000.0f) < 0.0001f)) << endl;
 
     return 0;
 }
