@@ -1,8 +1,10 @@
 #include "Employee.hpp"
 
-Employee::Employee(const std::string& name, int age, const std::string& position, double salary)
-    : name(name), age(age), position(position), salary(salary) {}
-    
+// Конструктор
+Employee::Employee(const std::string& name, int age, const std::string& profession, double meanPoints)
+    : name(name), age(age), profession(profession), meanPoints(meanPoints) {}
+
+// Геттеры
 std::string Employee::getName() const {
     return name;
 }
@@ -11,10 +13,11 @@ int Employee::getAge() const {
     return age;
 }
 
-std::string Employee::getPosition() const {
-    return position;
+std::string Employee::getProfession() const {
+    return profession;
 }
 
-double Employee::getSalary() const {
-    return salary;
+double Employee::getMeanPoints() const {
+    return meanPoints;
 }
+
