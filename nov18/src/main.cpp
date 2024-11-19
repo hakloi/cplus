@@ -1,5 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <cstdlib>
+#include <vector>
+
+sf::Color randColor()
+{
+    int r = rand() % 256;
+    int g = rand() % 256;
+    int b = rand() % 256;
+    return sf::Color(r, g ,b);
+}
 
 void setupRectangle(sf::RectangleShape& rect, sf::Vector2i firstClick, sf::Vector2i secondClick) {
     sf::Vector2f size(std::abs(secondClick.x - firstClick.x),
@@ -11,14 +21,15 @@ void setupRectangle(sf::RectangleShape& rect, sf::Vector2i firstClick, sf::Vecto
     rect.setPosition(std::min(firstClick.x, secondClick.x), 
                      std::min(firstClick.y, secondClick.y));
 
-    rect.setFillColor(sf::Color::Magenta);
+    rect.setFillColor(randColor());
 }
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(1600, 800), "My first SFML window");
 
-    sf::Vector2i firstClick;  
-    sf::RectangleShape rect; 
+    sf::Vector2i firstClick; 
+    std::vector<sf::RectangleShape> rectangles; 
+    sf::RectangleShape tempRect;
     bool drawing = false;    // frame
     bool finalized = false;  // current rectange
 
@@ -38,12 +49,28 @@ int main() {
                         finalized = false;
                     } else {
                         sf::Vector2i secondClick(event.mouseButton.x, event.mouseButton.y);
-                        setupRectangle(rect, firstClick, secondClick);
+                        sf::RectangleShape newRect;
+                        setupRectangle(newRect, firstClick, secondClick);
+                        rectangles.push_back(newRect);
                         drawing = false;
                         finalized = true;
                     }
                 }
+                else if (event.mouseButton.button == sf::Mouse::Button::Right) {
+                    sf::Vector2i clickPos(event.mouseButton.x, event.mouseButton.y);
+                    // reverse order
+                    for (auto it = rectangles.rbegin(); it != rectangles.rend(); ++it) {
+                        if (it->getGlobalBounds().contains(clickPos.x, clickPos.y)) {
+                            rectangles.erase((it + 1).base()); 
+                            break; 
+                        }
+                    }
+                    // if (rectangles.size() != 0){
+                    //     rectangles.pop_back();
+                    // }
+                }
                 break;
+
 
             case sf::Event::Resized:
                 window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
@@ -52,6 +79,11 @@ int main() {
         }
 
         window.clear(sf::Color(128, 128, 128));
+
+        for (auto& rect : rectangles)
+        {
+            window.draw(rect);
+        }
 
         if (drawing) {
             sf::Vector2i mousePos = sf::Mouse::getPosition(window);
@@ -65,9 +97,9 @@ int main() {
             window.draw(tempRect);
         }
 
-        if (finalized) {
-            window.draw(rect);
-        }
+        // if (finalized) {
+        //     window.draw(rect);
+        // }
 
         window.display();
     }
